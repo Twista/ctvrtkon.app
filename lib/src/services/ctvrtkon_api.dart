@@ -4,7 +4,7 @@ import 'package:ctvrtkon/src/model/post.dart';
 import 'package:http/http.dart' as http;
 
 class CtvrtkonAPI {
-  final API_URL = 'https://www.ctvrtkon.cz/feed-1.json';
+  static const API_URL = 'https://www.ctvrtkon.cz/feed-1.json';
 
   Future<List<Post>> fetchPosts() async {
     await new Future.delayed(const Duration(seconds: 1));

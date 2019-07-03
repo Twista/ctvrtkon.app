@@ -1,6 +1,7 @@
 import 'package:ctvrtkon/src/model/post.dart';
 import 'package:ctvrtkon/src/widgets/post_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PostList extends StatelessWidget {
   final List<Post> posts;
@@ -18,69 +19,57 @@ class PostList extends StatelessWidget {
             ));
   }
 
+  _markCurrent(Post post) {
+    // todo: distinguish between old and up-to-date ones
+    return _buildItem(post);
+  }
+
+  _withSectionColor(String section) {
+    // todo: better colors & handle
+    if (section == "dev") {
+      return Colors.white70;
+    }
+    if (section == "mkt") {
+      return Colors.redAccent;
+    }
+    if (section == "ux") {
+      return Colors.greenAccent;
+    }
+    return Colors.transparent;
+  }
+
   _buildPost(Post post) {
     return Card(
       elevation: 0.8,
-      margin: new EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      margin: new EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Container(
-          decoration: BoxDecoration(color: Color.fromRGBO(5, 144, 188, 1)),
-          child: ListTile(
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-            title: Text(
-              post.title,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-            subtitle: Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.today,
-                    color: Colors.white,
-                    size: 15,
-                  ),
-                  Text(' ${post.time}', style: TextStyle(color: Colors.white))
-                ],
-              ),
-            ),
-            trailing: Icon(Icons.keyboard_arrow_right,
-                color: Colors.white, size: 30.0),
-          )),
+          decoration: BoxDecoration(
+              border: Border(left: BorderSide(color: _withSectionColor(post.section), width: 5.0)), color: Color.fromRGBO(5, 144, 188, 1)),
+          child: _markCurrent(post)),
     );
   }
 
-  _buildPost2(Post post) {
-    return new ListTile(
-      title: Text(post.title),
-      subtitle: Row(
-        children: <Widget>[
-          Padding(
-            child: Icon(
-              Icons.calendar_today,
-              size: 15,
-            ),
-            padding: EdgeInsets.only(right: 5),
-          ),
-          Text(post.time),
-          Padding(
-            child: Icon(
-              Icons.place,
-              size: 15,
-            ),
-            padding: EdgeInsets.only(left: 10, right: 5),
-          ),
-          Expanded(
-              child: Text(
-            post.place,
-            softWrap: true,
-            overflow: TextOverflow.ellipsis,
-          ))
-        ],
+  _buildItem(Post post) {
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+      title: Text(
+        post.fullTitle,
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
       ),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.today,
+              color: Colors.white,
+              size: 15,
+            ),
+            Text(' ${new DateFormat("dd. MM. y H:ms").format(post.time)}', style: TextStyle(color: Colors.white))
+          ],
+        ),
+      ),
+      trailing: Icon(Icons.info_outline, color: Colors.white, size: 30.0),
     );
   }
 }

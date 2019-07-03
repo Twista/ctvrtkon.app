@@ -12,11 +12,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Color.fromRGBO(0, 124, 163, 1.0),
       appBar: AppBar(
         elevation: 0.1,
-        title: Text('Čtvrtkon',
-            style: TextStyle(
-                fontFamily: 'Siruca',
-                fontWeight: FontWeight.w400,
-                fontSize: 35)),
+        title: Text('Čtvrtkon', style: TextStyle(fontFamily: 'Siruca', fontWeight: FontWeight.w400, fontSize: 35)),
       ),
       body: Container(
         child: !postsCollection.isLoaded
@@ -40,12 +36,11 @@ class HomeScreen extends StatelessWidget {
         Center(
             child: Column(
           children: <Widget>[
-            CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.white)),
+            CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.white)),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                'Loading new posts...',
+                'Nahrávám...',
                 style: TextStyle(color: Colors.white),
               ),
             )

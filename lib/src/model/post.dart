@@ -1,12 +1,15 @@
+import '../utils.dart';
+
 class Post {
   final String id;
   final String title;
   final String description;
   final String image;
   final String url;
+  final String section;
   final String place;
   final String facebookEvent;
-  final String time; // todo format
+  final DateTime time;
 
   Post(
       {this.id,
@@ -15,8 +18,19 @@ class Post {
       this.image,
       this.url,
       this.place,
+      this.section,
       this.facebookEvent,
       this.time});
+
+  static const Map<String, String> sectionMap = {
+    'dev': '[DEV]',
+    'mkt': '[MKT]',
+    'ux': '[UX]',
+    'special': '[Speciál]',
+    'other': '[Jiné]',
+  };
+
+  get fullTitle => (sectionMap.containsKey(section) ? '${sectionMap[section]} ' : '') + ' $title';
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
@@ -26,8 +40,9 @@ class Post {
       image: json['image'],
       url: json['url'],
       place: json['place'],
+      section: json['section'],
       facebookEvent: json['facebookEvent'],
-      time: json['time'],
+      time: stringToDateTime(json['time']),
     );
   }
 }

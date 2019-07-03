@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'src/home_screen.dart';
 import 'src/model/post_collection.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

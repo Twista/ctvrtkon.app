@@ -76,42 +76,28 @@ class PostDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     print('${post.image} - ${post.title}');
     return Material(
-        // This makes sure that text and other content follows the material style
-        type: MaterialType.transparency,
-        //type: MaterialType.canvas,
-        // make sure that the overlay content is not cut off
-        child: SafeArea(
-          bottom: true,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10))),
-            margin: EdgeInsets.only(bottom: 0, left: 0, right: 0, top: 120),
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(post.title),
-                centerTitle: false,
-                automaticallyImplyLeading: false,
-                actions: <Widget>[
-                  IconButton(
-                      icon: Icon(Icons.close),
-                      onPressed: () {
-                        try {
-                          Navigator.pop(context); //close the popup
-                        } catch (e) {}
-                      })
-                ],
-              ),
-              body: _buildContent(post),
-            ),
+      child: Container(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(post.title),
+            centerTitle: false,
+            actions: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    try {
+                      Navigator.pop(context); //close the popup
+                    } catch (e) {}
+                  })
+            ],
           ),
-        ));
+          body: _buildContent(post),
+        ),
+      ),
+    );
   }
 
   static Future dialog(Post post, BuildContext ctx) async {
-    await showDialog(
-        context: ctx, builder: (context) => PostDetail(post: post));
+    await showDialog(context: ctx, builder: (context) => PostDetail(post: post));
   }
 }
