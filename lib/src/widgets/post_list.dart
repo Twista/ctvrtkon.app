@@ -15,7 +15,7 @@ class PostList extends StatelessWidget {
         itemCount: posts.length,
         itemBuilder: (ctx, index) => GestureDetector(
               child: _buildPost(posts[index]),
-              onTap: () => PostDetail.dialog(posts[index], ctx),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PostDetail(post: posts[index]))),
             ));
   }
 
@@ -69,7 +69,7 @@ class PostList extends StatelessWidget {
           ],
         ),
       ),
-      trailing: Icon(Icons.info_outline, color: Colors.white, size: 30.0),
+      trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
     );
   }
 }

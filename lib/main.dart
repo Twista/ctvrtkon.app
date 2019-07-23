@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       },
       child: MaterialApp(
           title: 'Čtvrtkon',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
             fontFamily: 'Roboto',
