@@ -19,11 +19,6 @@ class PostList extends StatelessWidget {
             ));
   }
 
-  _markCurrent(Post post) {
-    // todo: distinguish between old and up-to-date ones
-    return _buildItem(post);
-  }
-
   _withSectionColor(String section) {
     /*
     DEV: #00d674
@@ -49,10 +44,10 @@ class PostList extends StatelessWidget {
     return Card(
       color: Colors.white,
       elevation: 0.8,
-      margin: new EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Container(
           decoration: BoxDecoration(border: Border(left: BorderSide(color: _withSectionColor(post.section), width: 7.0))),
-          child: _markCurrent(post)),
+          child: _buildItem(post)),
     );
   }
 
