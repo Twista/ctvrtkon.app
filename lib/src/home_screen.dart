@@ -9,9 +9,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final postsCollection = Provider.of<PostCollection>(context);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(0, 124, 163, 1.0),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0.1,
+        elevation: 10,
         title: Text('Čtvrtkon', style: TextStyle(fontFamily: 'Siruca', fontWeight: FontWeight.w400, fontSize: 35)),
       ),
       body: Container(
@@ -36,12 +36,12 @@ class HomeScreen extends StatelessWidget {
         Center(
             child: Column(
           children: <Widget>[
-            CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.white)),
+            CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.black54)),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
                 'Nahrávám...',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             )
           ],

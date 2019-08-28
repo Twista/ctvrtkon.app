@@ -25,26 +25,33 @@ class PostList extends StatelessWidget {
   }
 
   _withSectionColor(String section) {
-    // todo: better colors & handle
+    /*
+    DEV: #00d674
+    MKT: #e77f1a
+    UX: #e3006e
+    * */
     if (section == "dev") {
-      return Colors.white70;
+      return Color.fromRGBO(0, 214, 116, 1);
     }
     if (section == "mkt") {
-      return Colors.redAccent;
+      return Color.fromRGBO(231, 127, 26, 1);
     }
     if (section == "ux") {
-      return Colors.greenAccent;
+      return Color.fromRGBO(227, 0, 110, 1);
+    }
+    if (section == "special") {
+      return Colors.yellow;
     }
     return Colors.transparent;
   }
 
   _buildPost(Post post) {
     return Card(
+      color: Colors.white,
       elevation: 0.8,
       margin: new EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Container(
-          decoration: BoxDecoration(
-              border: Border(left: BorderSide(color: _withSectionColor(post.section), width: 5.0)), color: Color.fromRGBO(5, 144, 188, 1)),
+          decoration: BoxDecoration(border: Border(left: BorderSide(color: _withSectionColor(post.section), width: 7.0))),
           child: _markCurrent(post)),
     );
   }
@@ -54,7 +61,7 @@ class PostList extends StatelessWidget {
       contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
       title: Text(
         post.fullTitle,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+        style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 18),
       ),
       subtitle: Padding(
         padding: const EdgeInsets.only(top: 10),
@@ -62,14 +69,14 @@ class PostList extends StatelessWidget {
           children: <Widget>[
             Icon(
               Icons.today,
-              color: Colors.white,
+              color: Colors.black54,
               size: 15,
             ),
-            Text(' ${new DateFormat("dd. MM. y H:ms").format(post.time)}', style: TextStyle(color: Colors.white))
+            Text(' ${new DateFormat("dd. MM. y H:ms").format(post.time)}', style: TextStyle(color: Colors.black54))
           ],
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+      trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black54, size: 30.0),
     );
   }
 }

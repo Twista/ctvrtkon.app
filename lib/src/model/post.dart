@@ -11,16 +11,7 @@ class Post {
   final String facebookEvent;
   final DateTime time;
 
-  Post(
-      {this.id,
-      this.title,
-      this.description,
-      this.image,
-      this.url,
-      this.place,
-      this.section,
-      this.facebookEvent,
-      this.time});
+  Post({this.id, this.title, this.description, this.image, this.url, this.place, this.section, this.facebookEvent, this.time});
 
   static const Map<String, String> sectionMap = {
     'dev': '[DEV]',
@@ -32,6 +23,11 @@ class Post {
 
   get fullTitle => (sectionMap.containsKey(section) ? '${sectionMap[section]} ' : '') + ' $title';
 
+  @override
+  String toString() {
+    return 'Post{id: $id, title: $title, description: $description, image: $image, url: $url, section: $section, place: $place, facebookEvent: $facebookEvent, time: $time}';
+  }
+
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
       id: json['id'],
@@ -41,7 +37,7 @@ class Post {
       url: json['url'],
       place: json['place'],
       section: json['section'],
-      facebookEvent: json['facebookEvent'],
+      facebookEvent: json['fbEventLink'],
       time: stringToDateTime(json['time']),
     );
   }

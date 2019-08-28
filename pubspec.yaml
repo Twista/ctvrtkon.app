@@ -22,7 +22,8 @@ dependencies:
   provider: ^2.0.0
   http: ^0.12.0+2
   url_launcher: any
-  meet_network_image: any
+  flutter_cache_manager: any
+  cached_network_image: any
   intl: ^0.15.8
 
   # The following adds the Cupertino Icons font to your application.

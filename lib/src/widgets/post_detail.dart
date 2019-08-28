@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ctvrtkon/src/model/post.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meet_network_image/meet_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+const Widget EMPTY = SizedBox.shrink();
 
 class PostDetail extends StatelessWidget {
   final Post post;
@@ -36,17 +38,17 @@ class PostDetail extends StatelessWidget {
   _buildContent(Post post) {
     return ListView(
       children: <Widget>[
-        MeetNetworkImage(
+        CachedNetworkImage(
+          imageUrl: post.image,
+          imageBuilder: (context, imageProvider) => Container(
             height: 210,
-            fit: BoxFit.cover,
-            imageUrl: post.image,
-            loadingBuilder: (context) => SizedBox(
-                  height: 210,
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-            errorBuilder: (context, e) => Center(
-                  child: Text("Obrázek se nepodařilo nahrát"),
-                )),
+            decoration: BoxDecoration(
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+            ),
+          ),
+          placeholder: (context, url) => SizedBox(height: 210, child: Center(child: CircularProgressIndicator())),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
         Padding(
           padding: const EdgeInsets.all(15),
           child: Row(
@@ -86,6 +88,7 @@ class PostDetail extends StatelessWidget {
   }
 
   Row _buildCTAButtons(Post post) {
+    print(post);
     return Row(
       children: <Widget>[
         Expanded(
@@ -108,16 +111,17 @@ class PostDetail extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: RaisedButton.icon(
-              label: Text('FB'),
-              icon: Icon(Icons.event),
-              onPressed: () => _launchURL(post.facebookEvent),
-            ),
-          ),
-        ),
+        post.facebookEvent == null
+            ? EMPTY : Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton.icon(
+                    label: Text('FB'),
+                    icon: Icon(Icons.event),
+                    onPressed: () => _launchURL(post.facebookEvent),
+                  ),
+                ),
+              ),
       ],
     );
   }
